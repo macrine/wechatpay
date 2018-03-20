@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="cordova-plugin-wechatpay" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>wechatpay</name>
+    <name>WechatPay</name>
 
     <js-module name="wechatpay" src="www/wechatpay.js">
-        <clobbers target="wechatpay"/>
+        <clobbers target="WechatPay"/>
     </js-module>
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
-            <feature name="wechatpay">
+            <feature name="WechatPay">
                 <param name="android-package" value="org.apache.cordova.wechatpay.WechatPay"/>
             </feature>
         </config-file>
@@ -20,12 +20,19 @@
             <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
         </config-file>
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <activity android:name="org.apache.cordova.wechatpay.WXPayEntryActivity" android:exported="true" android:launchMode="singleTop"/>
+        </config-file>
+
         <source-file src="src/android/WechatPay.java" target-dir="src/org/apache/cordova/wechatpay"/>
+        <source-file src="src/android/WXPayEntryActivity.java" target-dir="src/org/apache/cordova/wechatpay"/>
+
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
     </platform>
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
-            <feature name="wechatpay">
-                <param name="ios-package" value="wechatpay"/>
+            <feature name="WechatPay">
+                <param name="ios-package" value="WechatPay"/>
             </feature>
         </config-file>
         <header-file src="src/ios/WechatAuthSDK.h"/>
