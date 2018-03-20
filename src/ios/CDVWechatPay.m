@@ -6,6 +6,7 @@
 
 @interface CDVWechatPay : CDVPlugin {
   // Member variables go here.
+    CDVInvokedUrlCommand *cdvcommand;
 }
 
 @property (nonatomic, strong) NSString *wechatAppId;
@@ -13,8 +14,8 @@
 - (void)pay:(CDVInvokedUrlCommand*)command;
 @end
 
-@implementation CDVWechat
-static CDVInvokedUrlCommand *cdvcommand;
+@implementation CDVWechatPay
+
 
 - (void)pluginInitialize {
     NSString* appId = [[self.commandDelegate settings] objectForKey:@"wechatappid"];
@@ -65,7 +66,7 @@ static CDVInvokedUrlCommand *cdvcommand;
                       caseWXSuccess:
                       			//服务器端查询支付通知或查询API返回的结果再提示成功
                       			NSLog(@"支付成功");
-                          
+
                           [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"支付成功"] callbackId:cdvcommand.callbackId];
                       	break;
                       default:
